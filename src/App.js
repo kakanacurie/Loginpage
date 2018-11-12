@@ -1,28 +1,48 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import Input from "./Components/TextInput/TextInput";
+import CustomButton from "./Components/Buttons/CustomButton";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+export default class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			email: "",
+			password: "",
+			isLoading: false
+		};
+	}
+	onChangeTextInput = (e, key) => {
+		this.setState({
+			[key]: e.target.value
+		});
+	};
+
+	onSend = () => {
+		console.log(this.state);
+	};
+	render() {
+		return (
+			<div className="App">
+				<h1>SheCanCode Cohort2</h1>
+				<div className="login-form">
+					<Input
+						label="Enter your email"
+						type="email"
+						placeholder="me@any.com"
+						value={this.state.email}
+						onChange={e => this.onChangeTextInput(e, "email")}
+					/>
+					<Input
+						label="Enter your password"
+             			type="password"
+            			placeholder="password"
+						value={this.state.password}
+						onChange={e => this.onChangeTextInput(e, "password")}
+					/>
+					<CustomButton title="Send" onClick={() => this.onSend()} />
+				</div>
+			</div>
+		);
+	}
 }
-
-export default App;
